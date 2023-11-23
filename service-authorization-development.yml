@@ -27,10 +27,6 @@ logging:
 
 spring:
   application.name: service-authorization
-  config:
-    import: "optional:configserver:http://localhost:8088"
-  profiles:
-    active: development
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://local-server.com:5432/postgres
