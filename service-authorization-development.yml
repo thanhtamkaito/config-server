@@ -9,7 +9,7 @@ server:
 grpc:
   client:
     service-authorization:
-      address: static://localhost:18084
+      address: static://localhost:18081
       negotiationType: plaintext
 
 eureka:
