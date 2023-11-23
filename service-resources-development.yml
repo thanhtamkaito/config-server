@@ -21,11 +21,11 @@ spring:
     oauth2:
       resource-server:
         jwt:
-          issuer-uri: http://service-authorization:8081
-          jwk-set-uri: http://service-authorization:8081/oauth2/jwks
+          issuer-uri: http://service-authorization:8099
+          jwk-set-uri: http://service-authorization:8099/oauth2/jwks
 
         
         opaque:
-          introspection-uri: "http://service-authorization:8081/connect/introspect"
+          introspection-uri: "http://service-authorization:8099/connect/introspect"
           introspection-client-id: client-test
           introspection-client-secret: password
