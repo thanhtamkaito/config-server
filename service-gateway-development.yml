@@ -59,7 +59,3 @@ spring:
             issuer-uri: http://service-authorization:8099
 
 
-#      resource-server:
-#        jwt:
-#          jwk-set-uri: http://service-authorization:8081/oauth2/jwks
-
