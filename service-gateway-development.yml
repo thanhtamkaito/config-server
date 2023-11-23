@@ -1,0 +1,65 @@
+server:
+  port: 8083
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.security: INFO
+    org.springframework.security.oauth2: INFO
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://service-registry:8085/eureka/
+
+spring:
+  application.name: service-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: resources
+          uri: lb://service-resources
+          predicates:
+            - Path=/private/**
+          filters:
+            #            - TokenRelay=
+            - IdTokenRelay=
+        - id: public
+          uri: lb://service-resources
+          predicates:
+            - Path=/public/**
+        - id: auth
+          uri: lb://service-authorization
+          predicates:
+            - Path=/connect/**
+
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:3000"
+            allowedHeaders: "*"
+            allowedMethods:
+              - GET
+              - POST
+
+  security:
+    oauth2:
+      client:
+        registration:
+          gateway:
+            provider: my-provider
+            client-id: gateway-client-id
+            client-secret: password
+            authorization-grant-type: authorization_code
+            redirect-uri: "http://service-gateway:8083/login/oauth2/code/{registrationId}"
+            scope: openid, message.read
+            provider:
+              my-provider:
+                issuer-uri: http://service-authorization:8099
+
+
+#      resource-server:
+#        jwt:
+#          jwk-set-uri: http://service-authorization:8081/oauth2/jwks
+
