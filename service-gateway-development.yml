@@ -54,9 +54,9 @@ spring:
             authorization-grant-type: authorization_code
             redirect-uri: "http://service-gateway:8083/login/oauth2/code/{registrationId}"
             scope: openid, message.read
-            provider:
-              my-provider:
-                issuer-uri: http://service-authorization:8099
+          provider:
+            my-provider:
+              issuer-uri: http://service-authorization:8081
 
 
 #      resource-server:
